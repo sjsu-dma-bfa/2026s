@@ -1,0 +1,577 @@
+/* Base styles */
+:root {
+  --bg: #0e0f12;
+  --panel: #14161b;
+  --text: #e5f7ee;
+  --muted: #e9ebf0;
+  --brand: #6aa6ff;
+  --brand-strong: #3f86ff;
+  --border: #242732;
+  /* Violet gradient palette */
+  --violet-1: #6c33ff;
+  /* brighter violet top */
+  --violet-2: #3a1b5a;
+  /* deep purple mid */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  /* Layered gradient: subtle violet glow + vertical fade + bottom vignette */
+  background:
+    /* Responsive violet glow sized with percentages */
+    radial-gradient(80% 55% at 50% 0%, rgba(153, 86, 255, 0.30) 0%, rgba(153, 86, 255, 0) 60%),
+    /* Bottom vignette to avoid a hard-colored strip at the page end */
+    linear-gradient(180deg, rgba(16, 16, 16, 0) 0%, rgba(15, 15, 15, 0.65) 100%),
+    /* Top (0%) to bottom (100%): black -> deep purple -> violet */
+    linear-gradient(180deg, #0b0c10 0%, #12131a 30%, var(--violet-2) 70%, var(--violet-1) 100%);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center top, center top, center top;
+  background-size: 100% 100%, 100% 100%, 100% 100%;
+  background-attachment: fixed, fixed, fixed;
+  /* anchored to viewport */
+  /* line-height: 1.6; */
+}
+
+.container {
+  width: min(1120px, 92%);
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(14, 15, 18, 0.75);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+.brand {
+  font-family: "Major Mono Display", sans-serif;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.site-nav a {
+  font-family: "Oxanium", sans-serif;
+  color: var(--muted);
+  text-decoration: none;
+  margin-left: 18px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-weight: 400;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--text);
+  background: rgba(106, 166, 255, 0.12);
+}
+
+/* Footer */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 64px;
+}
+
+.footer-inner {
+  padding: 28px 0;
+  color: var(--muted);
+}
+
+/* Home */
+.hero {
+  padding: 80px 0 24px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4.6vw, 56px);
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: -1;
+}
+
+/* Landing hero overrides */
+.hero-landing {
+  padding: clamp(40px, 8vh, 100px) 0 40px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 0.8fr minmax(480px, 1fr) 0.8fr;
+  grid-template-rows: auto auto auto;
+  row-gap: clamp(12px, 3vh, 24px);
+  align-items: center;
+  justify-items: center;
+}
+
+.hero-title {
+  font-family: "Major Mono Display", monospace;
+  font-weight: 400;
+  font-style: normal;
+  font-size: clamp(36px, 7.5vw, 96px);
+  letter-spacing: 4px;
+  margin: 0 0 24px;
+  grid-column: 2;
+  grid-row: 1;
+  text-shadow:
+    1px 1px 0 #3a1b5a,
+    2px 2px 0 #535353,
+    4px 4px 12px rgba(196, 196, 196, 0.6);
+}
+
+.hero-figure {
+  margin: 0;
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.hero-image {
+  width: clamp(220px, 38vw, 480px);
+  display: block;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-shadow: 0px 0px 15px 15px rgb(255, 255, 255);
+  height: auto;
+  max-width: 100%;
+
+}
+
+.hero-actions-center {
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* Responsive Hero Elements for smaller screens */
+@media (max-width: 1200px) {
+  .hero-landing {
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .hero-title {
+    grid-column: 1;
+    justify-content: center;
+
+  }
+
+  .hero-figure {
+    margin: 0;
+    grid-column: 1;
+    justify-content: center;
+  }
+
+  .hero-image {
+    width: clamp(280px, 38vw, 520px);
+  }
+
+  .hero-actions-center {
+    justify-content: center;
+    grid-column: 1;
+  }
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.04));
+}
+
+.button.primary {
+  font-family: "Oxanium", sans-serif;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  border: 1px solid #6c33ff;
+  color: #e9ebf0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  box-shadow:
+    0 0 20px rgba(108, 51, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.button.primary:hover {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border-color: #8a5fff;
+  box-shadow:
+    0 0 30px rgba(108, 51, 255, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.quick-links {
+  padding: 28px 0 56px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: block;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Page header */
+.page-header {
+  padding: 40px 0 12px;
+}
+
+.page-header h1 {
+  margin: 0 0 8px;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Artists Pages */
+/* .artist-page {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+} */
+
+
+.artist-page img {
+  width: 210px;
+  display: block;
+  float: right;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 15px;
+}
+
+.artist-page a{
+  color: rgb(0, 250, 0);
+}
+
+.carousel {
+  background: black;
+  margin: 40px auto 80px;
+}
+
+.carousel-cell {
+  width: 70%;
+  height: 200px;
+  /* flex-box, center image in cell */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.carousel-cell img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  /* dim unselected */
+  opacity: 0.7;
+  -webkit-transform: scale(0.85);
+  transform: scale(0.85);
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  -webkit-transition: opacity 0.3s, -webkit-transform 0.3s, transform 0.3s, -webkit-filter 0.3s, filter 0.3s;
+  transition: opacity 0.3s, transform 0.3s, filter 0.3s;
+}
+
+/* brighten selected image */
+.carousel-cell.is-selected img {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-filter: none;
+  filter: none;
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-cell {
+    height: 400px;
+  }
+
+  .carousel {
+    margin: 40px auto 80px; 
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .carousel-cell {
+    width: 60%;
+  }
+}
+
+/* buttons, no circle */
+.flickity-prev-next-button {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  opacity: 0.6;
+}
+
+.flickity-prev-next-button:hover {
+  background: transparent;
+  opacity: 1;
+}
+
+/* arrow color */
+.flickity-prev-next-button .arrow {
+  fill: white;
+}
+
+.flickity-prev-next-button.no-svg {
+  color: white;
+}
+
+/* closer to edge */
+.flickity-prev-next-button.previous {
+  left: 0;
+}
+
+.flickity-prev-next-button.next {
+  right: 0;
+}
+
+/* hide disabled button */
+.flickity-prev-next-button:disabled {
+  display: none;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 720px) {
+  .artist-page img {
+    float: none;
+  }
+}
+
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  padding: 24px 0 56px;
+}
+
+.gallery-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.gallery-item figcaption {
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Artists */
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 24px 0 56px;
+}
+
+.artist-button {
+  display: block;
+  text-decoration: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.artist-button:hover {
+  transform: translateY(-4px);
+  filter: brightness(1.1);
+  box-shadow: 0 0 5px 5px rgb(255, 255, 255);
+}
+
+.artist-button img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Responsive grid for smaller screens */
+@media (max-width: 1200px) {
+  .artist-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .artist-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .artist-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* About */
+.about-section {
+  padding: 8px 0 12px;
+}
+
+/* Clear float for work section (about-section with h1 title) so carousel doesn't overlap portrait */
+/* Target the about-section that comes after another about-section (work section comes after About the Artist) */
+.about-section + .about-section,
+/* Fallback for browsers that support :has() - target section with h1 (work title) */
+.about-section:has(h1) {
+  clear: both;
+}
+
+.about-section h2 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.about-section p,
+.about-section ul {
+  margin: 0;
+  color: var(--muted);
+}
+
+.about-section > img {
+  margin: 0 auto 24px auto; 
+  display: block; 
+  width: 100%;
+  max-width: 800px;
+  border-radius: 20px;
+}
+
+/* Ensure carousel images are not affected by about-section img styles */
+.carousel-cell img {
+  margin: 0 !important;
+  float: none !important;
+  width: auto !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Credits Section */
+.credits-section {
+  padding: 24px 0;
+}
+
+.credit-category {
+  margin-bottom: 32px;
+}
+
+.credit-category h2 {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.credit-category p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* Accessibility helpers */
+a:focus,
+button:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Small screens */
+@media (max-width: 560px) {
+  .about-section > img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .artist-card {
+    grid-template-columns: 72px 1fr;
+  }
+
+  .artist-photo {
+    width: 72px;
+    height: 72px;
+  }
+}
