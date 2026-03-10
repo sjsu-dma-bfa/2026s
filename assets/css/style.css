@@ -8,6 +8,32 @@ subtle blue green   #55c1a9     ""
 deep sea            #173b4e     ""
 */
 
+/* GLOBAL STYLES */
+:root {
+    /* Colors */
+    --hot-peach: #ffdd91;
+    --creamsicle: #f19433;
+    --strawberry-juice: #b92146;
+    --subtle-blue-green: #55c1a9;
+    --deep-sea: #173b4e;
+
+    /* Fonts */
+    --font-primary: 'Gajraj One', cursive;
+    --font-secondary: 'Kumbh Sans', sans-serif;
+}
+
+
+html,
+body {
+    height: 100%;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
