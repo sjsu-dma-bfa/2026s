@@ -16,6 +16,7 @@ deep sea            #173b4e     ""
     --strawberry-juice: #b92146;
     --subtle-blue-green: #55c1a9;
     --deep-sea: #173b4e;
+    --white: #ffffff; /* for text */
 
     /* Fonts */
     --font-primary: 'Gajraj One', cursive;
@@ -47,18 +48,14 @@ body {
     min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6 {
+.primary-text, h1, h2, h3, h4, h5, h6, a.primary-text {
     font-family: var(--font-primary);
     font-weight: 600;
     font-style: normal;
-    margin: 0;
-}
-
-a.primary-text {
-    font-family: var(--font-primary);
-    font-weight: 600;
-    font-style: normal;
-    color: white;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 0 0 20px var(--deep-sea);
 }
 
 .navbar {
