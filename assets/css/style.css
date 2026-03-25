@@ -54,6 +54,44 @@ body {
     margin: 0 auto;
 }
 
+.artist-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    padding: 40px;
+}
+
+.artist-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.artist-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.artist-card:hover img {
+    transform: scale(1.08);
+}
+
+.artist-name {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: var(--deep-sea);
+    color: white;
+    text-align: center;
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+}
+
 .primary-text, h1, h2, h3, h4, h5, h6, a.primary-text {
     font-family: var(--font-primary);
     font-weight: 600;
@@ -98,6 +136,7 @@ body {
 .nav-links {
     display: flex;
     list-style: none;
+    padding-right: 40px;
 }
 
 .nav-links li {
