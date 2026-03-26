@@ -1,24 +1,22 @@
 /* 
 COLOR PALETTE
 
-hot peach           #ffdd91     ""
-creamsicle          #f19433     ""
-strawberry juice    #b92146     ""
-subtle blue green   #55c1a9     ""
-deep sea            #173b4e     ""
+hot peach           #ffdd91
+creamsicle          #f19433
+strawberry juice    #b92146
+subtle blue green   #55c1a9
+deep sea            #173b4e
 */
 
 /* GLOBAL STYLES */
 :root {
-    /* Colors */
     --hot-peach: #ffdd91;
     --creamsicle: #f19433;
     --strawberry-juice: #b92146;
     --subtle-blue-green: #55c1a9;
     --deep-sea: #173b4e;
-    --white: #ffffff; /* for text */
+    --white: #ffffff;
 
-    /* Fonts */
     --font-primary: 'Gajraj One', cursive;
     --font-secondary: 'Kumbh Sans', sans-serif;
 }
@@ -54,9 +52,10 @@ body {
     margin: 0 auto;
 }
 
+/* ARTIST GALLERY */
 .artist-gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 40px;
 }
@@ -67,6 +66,8 @@ body {
     overflow: hidden;
     border-radius: 12px;
     text-decoration: none;
+    border: 2px solid transparent;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .artist-card img {
@@ -74,6 +75,11 @@ body {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     transition: transform 0.3s ease;
+}
+
+.artist-card:hover {
+    border: 2px solid var(--subtle-blue-green);
+    box-shadow: 0 0 20px rgba(85, 193, 169, 0.5);
 }
 
 .artist-card:hover img {
@@ -85,14 +91,27 @@ body {
     bottom: 0;
     width: 100%;
     padding: 10px;
-    background: var(--deep-sea);
-    color: white;
+    background: linear-gradient(
+        to top,
+        rgba(23, 59, 78, 0.95),
+        rgba(23, 59, 78, 0.75),
+        rgba(23, 59, 78, 0.2)
+    );
+    color: var(--hot-peach);
     text-align: center;
     font-family: var(--font-primary);
-    font-size: 0.95rem;
+    font-size: 1.3rem;
 }
 
-.primary-text, h1, h2, h3, h4, h5, h6, a.primary-text {
+/* TYPOGRAPHY */
+.primary-text,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a.primary-text {
     font-family: var(--font-primary);
     font-weight: 600;
     font-style: italic;
@@ -115,13 +134,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 0;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    position: sticky;
-    top: 0;
+    padding: 0;
+    background: rgba(23, 59, 78, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
     z-index: 1000;
+}
+
+.header .logo {
+    position: relative;
+    top: 8px;
+    left: 20px;
 }
 
 .header .logo a {
@@ -137,6 +161,7 @@ body {
     display: flex;
     list-style: none;
     padding-right: 40px;
+    margin: 0;
 }
 
 .nav-links li {
@@ -146,10 +171,16 @@ body {
 .nav-links a {
     text-decoration: none;
     font-size: 24px;
+    color: var(--hot-peach);
+    transition: color 0.2s ease;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+    color: var(--creamsicle);
+}
+
 .nav-links a.active {
+    color: var(--strawberry-juice);
     border-radius: 4px;
 }
 
@@ -157,54 +188,120 @@ body {
 .footer {
     margin-top: auto;
     padding: 30px 0;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(23, 59, 78, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 24px;
 }
 
-/* Left */
 .footer-logos {
     display: flex;
     align-items: center;
     gap: 20px;
 }
- 
+
 .footer-logos img {
     height: 48px;
     width: auto;
 }
 
-/* Right */
 .footer-socials {
     display: flex;
     align-items: center;
     gap: 16px;
 }
- 
+
 .footer-social {
     display: flex;
     align-items: center;
     transition: opacity 0.2s ease;
 }
- 
+
 .footer-social:hover {
     opacity: 0.75;
 }
- 
+
 .footer-icon {
     height: 48px;
     width: auto;
 }
 
-/* Responsive */
+/* TABLET */
 @media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .header .logo {
+        position: static;
+        top: auto;
+        left: auto;
+    }
+
+    .header .logo img {
+        height: 90px;
+        width: auto;
+    }
+
+    .nav-links {
+        padding-right: 0;
+        margin: 10px 0 0;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .nav-links li {
+        margin-left: 0;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+    }
+
+    .artist-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 20px 10px;
+    }
+
+    .artist-name {
+        font-size: 1rem;
+        padding: 8px;
+    }
+
     .footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    .footer-logos img,
+    .footer-icon {
+        height: 36px;
+    }
+}
+
+/* PHONE */
+@media (max-width: 480px) {
+    .artist-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .artist-name {
+        font-size: 0.95rem;
+    }
+
+    .nav-links a {
+        font-size: 16px;
+    }
+
+    .main-container {
+        width: 94%;
     }
 }
