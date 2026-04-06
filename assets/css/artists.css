@@ -1,0 +1,315 @@
+/* ─── DRUM TITLE ─────────────────────────────────────────────────────────── */
+
+.drum-title {
+    font-family: var(--font-primary);
+    color: var(--hot-peach);
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-shadow: 0 0 20px rgba(255, 221, 145, 0.5);
+    margin-bottom: 0;
+}
+
+/* ─── DRUM ITEMS — text title + artist name, no thumbnails ──────────────── */
+
+.drum-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px 18px;
+    background: rgba(23, 59, 78, 0.70);
+    border-radius: 8px;
+    border: 1px solid rgba(85, 193, 169, 0.15);
+    cursor: pointer;
+    user-select: none;
+    overflow: hidden;
+}
+
+.drum-item-title {
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    color: var(--hot-peach);
+    letter-spacing: 1px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.drum-item-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.50);
+    letter-spacing: 0.5px;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.drum-item.active {
+    background: rgba(23, 59, 78, 0.95);
+    border-color: var(--subtle-blue-green);
+    box-shadow: 0 0 18px rgba(85, 193, 169, 0.5);
+}
+
+/* ─── SCANLINE OVERLAY — CRT feel ────────────────────────────────────────── */
+
+.drum-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 3px,
+        rgba(0, 0, 0, 0.05) 3px,
+        rgba(0, 0, 0, 0.05) 4px);
+    pointer-events: none;
+    z-index: 20;
+    border-radius: 12px;
+}
+
+/* ─── SELECTOR ZONE ──────────────────────────────────────────────────────── */
+
+.drum-selector-zone {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100px;
+    height: 210px;
+    background: rgba(85, 193, 169, 0.03);
+    pointer-events: none;
+    z-index: 4;
+}
+
+/* ─── DETAIL PANEL — transparent, acts as star container ────────────────── */
+
+.artist-detail {
+    position: relative;
+    flex: none;
+    /* Match the drum container height so both columns align flush */
+    width: 380px;
+    height: 420px;
+    display: flex;
+    align-items: center;       /* vertically centres the circle within the column */
+    justify-content: center;
+    cursor: pointer;
+    /* Strip the default panel card styles inherited from style.css */
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    min-height: unset !important;
+    gap: 0 !important;
+}
+
+/* ─── CIRCLE SHAPE — Walk of Fame style portrait ───────────────────────── */
+
+.artist-star {
+    position: relative;   /* sit inside the flex-centred .artist-detail */
+    flex-shrink: 0;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 0 6px var(--subtle-blue-green),
+                0 0 0 8px rgba(23, 59, 78, 0.9),
+                0 0 28px rgba(85, 193, 169, 0.45);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+                filter 0.25s ease;
+}
+
+.artist-star img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Subtle gradient so text stays readable */
+.artist-star::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 30%,
+        rgba(23, 59, 78, 0.72) 100%
+    );
+    pointer-events: none;
+}
+
+/* Hover: star pulses slightly */
+.artist-detail:hover .artist-star {
+    transform: scale(1.04);
+    filter: brightness(1.12) drop-shadow(0 0 24px rgba(85, 193, 169, 0.6));
+}
+
+/* ─── TEXT OVERLAY on the star ───────────────────────────────────────────── */
+
+.artist-star-overlay {
+    position: absolute;
+    bottom: 25%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.artist-detail-name {
+    font-family: var(--font-primary);
+    font-size: 1.05rem;
+    color: var(--white);
+    font-style: italic;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+    line-height: 1.2;
+}
+
+.artist-detail-subtitle {
+    font-family: var(--font-secondary);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.70);
+    letter-spacing: 1px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.artist-detail-hint {
+    font-family: var(--font-secondary);
+    font-size: 0.58rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+
+/* Star pops in when artist changes */
+@keyframes starPopIn {
+    from { opacity: 0; transform: scale(0.75) rotate(-8deg); }
+    to   { opacity: 1; transform: scale(1)    rotate(0deg);  }
+}
+
+.artist-detail.flash .artist-star {
+    animation: starPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.artist-detail.flash .artist-star-overlay {
+    animation: starPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
+}
+
+/* Star expands outward on navigate — the star "explodes" into shooting stars */
+@keyframes starExpand {
+    0%   { transform: scale(1);    opacity: 1; }
+    40%  { transform: scale(1.25); opacity: 1; }
+    100% { transform: scale(4);    opacity: 0; }
+}
+
+.artist-detail.star-expand .artist-star {
+    animation: starExpand 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    pointer-events: none;
+}
+
+.artist-detail.star-expand .artist-star-overlay {
+    animation: starExpand 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+    pointer-events: none;
+}
+
+/* ─── SHOOTING STARS OVERLAY ─────────────────────────────────────────────── */
+
+#shootingStarsOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+#shootingStarsOverlay.active {
+    pointer-events: all;
+}
+
+/* ─── DRUM FOOTER ────────────────────────────────────────────────────────── */
+
+.drum-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ─── KEYBOARD HINT ──────────────────────────────────────────────────────── */
+
+.keyboard-hint {
+    font-family: var(--font-secondary);
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.30);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.keyboard-hint kbd {
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.7rem;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+    .artist-detail {
+        width: 280px;
+        height: 420px;
+    }
+
+    .artist-star {
+        width: 260px;
+        height: 260px;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    .artist-detail {
+        width: 220px;
+        height: 420px;
+    }
+
+    .artist-star {
+        width: 200px;
+        height: 200px;
+    }
+
+
+
+    .artist-detail-name {
+        font-size: 0.85rem;
+    }
+}
+
+/* ─── NICKNAME ───────────────────────────────────────────────────────────── */
+
+.artist-nickname {
+    color: var(--subtle-blue-green);
+    font-style: normal;
+}
