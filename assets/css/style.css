@@ -15,7 +15,7 @@ deep sea            #173b4e
     --strawberry-juice: #b92146;
     --subtle-blue-green: #55c1a9;
     --deep-sea: #173b4e;
-    --white: #ffffff;
+    --text: #ffffff;
 
     --font-primary: 'Gajraj One', cursive;
     --font-secondary: 'Kumbh Sans', sans-serif;
@@ -221,9 +221,9 @@ a.primary-text {
 
 .secondary-text {
     font-family: var(--font-secondary);
-    font-weight: 400;
+    font-weight: bold;
     font-style: normal;
-    color: var(--white);
+    color: var(--text);
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px var(--deep-sea);
 }
 
