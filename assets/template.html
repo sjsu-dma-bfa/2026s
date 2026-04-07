@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTIST NAME</title>
+    <link rel="icon" type="image/png" href="../assets/images/BFA_LOGO.png">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/artist-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Gajraj+One&family=Kumbh+Sans:wght,YOPQ@100..900,300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="logo">
+            <a href="../index.html">
+                <img src="../assets/images/BFA_LOGO.png" alt="RE-MIX DIVISION">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a class="primary-text" href="../about.html">ABOUT</a></li>
+            <li><a class="primary-text" href="../artists.html">ARTISTS</a></li>
+        </ul>
+    </header>
+
+    <main class="main-container">
+        <article class="artist-page">
+
+            <a class="back-link" href="../artists.html">← Back to Artists</a>
+
+            <img class="artist-portrait"
+                src="../assets/artists_portrait/FILENAME.png"
+                alt="ARTIST NAME">
+
+            <h1>ARTIST NAME</h1>
+            <p class="secondary-text">( PRONOUNS )</p>
+
+            <!-- Remove any social links that don't apply -->
+            <ul class="artist-socials">
+                <li><a href="https://instagram.com/HANDLE" target="_blank" rel="noopener">Instagram</a></li>
+                <li><a href="https://linkedin.com/in/HANDLE" target="_blank" rel="noopener">LinkedIn</a></li>
+                <li><a href="https://youtube.com/@HANDLE" target="_blank" rel="noopener">YouTube</a></li>
+                <li><a href="https://PORTFOLIO_URL" target="_blank" rel="noopener">Portfolio</a></li>
+            </ul>
+
+            <h2>About the Artist</h2>
+            <p class="secondary-text">ARTIST BIO</p>
+
+            <hr class="artist-divider">
+
+            <!-- ── ARTWORK — duplicate this block for each piece ─────────── -->
+            <section class="artist-work">
+                <h2>ARTWORK TITLE</h2>
+
+                <!--
+                    CAROUSEL — put all work images inside .carousel-track.
+                    One image: prev/next buttons auto-hide.
+                    Multiple images: they slide. Clicking any image opens lightbox.
+                    Add or remove <img> tags as needed.
+                    Add a matching <button class="carousel-dot"> per image in .carousel-dots.
+                -->
+                <div class="carousel">
+                    <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&#8249;</button>
+                    <div class="carousel-track-wrap">
+                        <div class="carousel-track">
+                            <img src="../assets/works/FILENAME_1.png" alt="ARTWORK TITLE">
+                            <img src="../assets/works/FILENAME_2.png" alt="ARTWORK TITLE">
+                            <img src="../assets/works/FILENAME_3.png" alt="ARTWORK TITLE">
+                        </div>
+                    </div>
+                    <button class="carousel-btn carousel-btn-next" aria-label="Next">&#8250;</button>
+                </div>
+                <div class="carousel-dots">
+                    <button class="carousel-dot active"></button>
+                    <button class="carousel-dot"></button>
+                    <button class="carousel-dot"></button>
+                </div>
+
+                <p class="secondary-text">ARTIST STATEMENT</p>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logos">
+            <img src="../assets/images/san_jose_state_spartans_logo_secondary_2018_sportslogosnet-9520.png" alt="SJSU">
+            <img src="../assets/images/Hammer_Theatre_Logo-small.png" alt="Hammer Theater">
+        </div>
+        <div class="footer-socials">
+            <a class="footer-social" href="https://www.instagram.com/divisionremix" target="_blank" rel="noopener">
+                <img class="footer-icon" src="../assets/images/instagram.png" alt="Instagram">
+            </a>
+        </div>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <button id="lightbox-close">✕</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
+
+    <script src="../assets/js/artist-page.js"></script>
+
+</body>
+
+</html>
