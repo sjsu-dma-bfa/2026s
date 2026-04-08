@@ -279,3 +279,13 @@ updateDrum(false);
 setTimeout(() => {
     cylinder.querySelectorAll('.drum-item').forEach(el => { el.style.transition = ''; });
 }, 50);
+
+// Reset overlay and transitioning when user navigates back (bfcache restore)
+window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+        transitioning = false;
+        overlay.classList.remove('active');
+        overlay.innerHTML = '';
+        detail.classList.remove('star-expand');
+    }
+});
