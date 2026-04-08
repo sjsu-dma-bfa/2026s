@@ -1,0 +1,125 @@
+/* ARTIST PAGE */
+
+.artist-page {
+    padding: 40px 0;
+    max-width: 860px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+/* HERO — portrait left, info right */
+
+.artist-hero {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.artist-portrait {
+    flex-shrink: 0;
+    width: 400px;
+    height: auto;
+    display: block;
+    border: 6px solid var(--hot-peach);
+    border-radius: 4px;
+}
+
+.artist-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* DIVIDER */
+
+.artist-divider {
+    border: none;
+    border-top: 4px solid var(--hot-peach);
+    margin: 0;
+    opacity: 0.6;
+}
+
+/* WORK IMAGES */
+
+.artist-work {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.work-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    justify-items: center;
+}
+
+.work-images img {
+    height: 300px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.work-images video {
+    height: 300px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Single image — full width centered */
+.work-images.single {
+    grid-template-columns: 1fr;
+}
+
+.work-images.single img {
+    margin: 0 auto;
+}
+
+.work-images.single video {
+    margin: 0 auto;
+}
+
+/* BACK LINK */
+
+.back-link {
+    font-family: var(--font-primary);
+    font-size: 1.3rem;
+    color: var(--subtle-blue-green);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(85, 193, 169, 0.3);
+    padding-bottom: 1px;
+    align-self: flex-start;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--creamsicle);
+    border-color: rgba(255, 221, 145, 0.5);
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .artist-hero {
+        flex-direction: column;
+    }
+
+    .artist-portrait {
+        width: 100%;
+    }
+
+    .work-images {
+        grid-template-columns: 1fr;
+    }
+
+    .work-images img {
+        height: auto;
+        width: 100%;
+    }
+}

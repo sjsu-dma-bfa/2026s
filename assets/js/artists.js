@@ -20,7 +20,7 @@ const ARTISTS = [
     { nickname: "Yan", name: "Yanheng Ma", title: "Love", subtitle: "Biblical 2D Motion Graphic Animation", imgX: 50, imgY: 45, imgScale: 1.5, img: "assets/artists_portrait/yanheng_ma.jpeg", href: "artists/yanheng_ma.html" },
     { nickname: "DerpRex", name: "Catherine Macdonald", title: "Guardian of Artistic Integrity", subtitle: "Mixed Media Painting", imgX: 60, imgY: 50, imgScale: 1.5, img: "assets/artists_portrait/catherine_macdonald.png", href: "artists/catherine_macdonald.html" },
     { nickname: "[etho.png]", name: "Ethan Vilchis Macedo", title: "Spiraling Madness", subtitle: "Horror Game", imgX: 53, imgY: 45, imgScale: 1.5, img: "assets/artists_portrait/ethan_vilchis_macedo.jpeg", href: "artists/team_spiral.html" },
-    { nickname: null, name: "David Nguyen", title: "Ancient Stroll", subtitle: "", imgX: 53, imgY: 50, imgScale: 2.0, img: "assets/artists_portrait/david_nguyen.jpg", href: "artists/david_nguyen.html" },
+    { nickname: null, name: "David Nguyen", title: "Prehistoric Walk", subtitle: "Projected, Looping Documentary", imgX: 53, imgY: 50, imgScale: 2.0, img: "assets/artists_portrait/david_nguyen.jpg", href: "artists/david_nguyen.html" },
     { nickname: null, name: "Nguyen Nguyen", title: "Magic Evolved", subtitle: "Power Fantasy Game", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/nguyen_nguyen.png", href: "artists/nguyen_nguyen.html" },
     { nickname: "Alex", name: "Alexander Rodriguez", title: "My Silly Little Dungeon", subtitle: "Interactive Video Installation in a 3D Environment", imgX: 45, imgY: 50, imgScale: 2.0, img: "assets/artists_portrait/alexander_rodriguez.png", href: "artists/alexander_rodriguez.html" },
     { nickname: "Lizzie Jane", name: "Elizabeth Salinas", title: "To The Land That I Love", subtitle: "Animation Projected over Painting", imgX: 50, imgY: 65, imgScale: 1.5, img: "assets/artists_portrait/elizabeth_salinas.png", href: "artists/elizabeth_salinas.html" },
@@ -36,7 +36,8 @@ const ARTISTS = [
     { nickname: null, name: "Shirley Zhong", title: "Determined", subtitle: "Short Animation about an Octopus", imgX: 50, imgY: 60, imgScale: 1.5, img: "assets/artists_portrait/shirley_zhong.png", href: "artists/shirley_zhong.html" },
 ];
 
-// STATE
+if (!document.getElementById('drumCylinder')) throw new Error('not on artists page');
+
 const N            = ARTISTS.length;
 const ROT_PER_STEP = 22;
  

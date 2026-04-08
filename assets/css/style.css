@@ -227,6 +227,21 @@ a.primary-text {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px var(--deep-sea);
 }
 
+a {
+    font-family: var(--font-primary);
+    font-weight: 400;
+    font-style: italic;
+    text-decoration: none;
+    color: var(--subtle-blue-green);
+    letter-spacing: 3px;
+    word-spacing: 5px;
+    text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8), 0 0 20px var(--text);
+}
+a:hover {
+    color: var(--creamsicle);
+    border-color: rgba(255, 221, 145, 0.5);
+}
+
 /* HEADER */
 .header {
     display: flex;

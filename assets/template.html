@@ -33,57 +33,46 @@
     <main class="main-container">
         <article class="artist-page">
 
-            <a class="back-link" href="../artists.html">← Back to Artists</a>
+            <a class="back-link" href="../artists.html">← BACK TO ARTISTS</a>
 
-            <img class="artist-portrait"
-                src="../assets/artists_portrait/FILENAME.png"
-                alt="ARTIST NAME">
+            <!-- HERO: portrait on left, info on right -->
+            <div class="artist-hero">
 
-            <h1>ARTIST NAME</h1>
-            <p class="secondary-text">( PRONOUNS )</p>
+                <img class="artist-portrait" src="../assets/artists_portrait/FILENAME.png" alt="ARTIST NAME">
 
-            <!-- Remove any social links that don't apply -->
-            <ul class="artist-socials">
-                <li><a href="https://instagram.com/HANDLE" target="_blank" rel="noopener">Instagram</a></li>
-                <li><a href="https://linkedin.com/in/HANDLE" target="_blank" rel="noopener">LinkedIn</a></li>
-                <li><a href="https://youtube.com/@HANDLE" target="_blank" rel="noopener">YouTube</a></li>
-                <li><a href="https://PORTFOLIO_URL" target="_blank" rel="noopener">Portfolio</a></li>
-            </ul>
+                <div class="artist-info">
+                    <h1>ARTIST NAME</h1>
+                    <p class="secondary-text">( PRONOUNS )</p>
 
-            <h2>About the Artist</h2>
-            <p class="secondary-text">ARTIST BIO</p>
+                    <!-- FORMAT: Platform: @handle | Platform: @handle | Platform: Link -->
+                    <!-- Remove any that don't apply -->
+                    <p class="secondary-text">
+                        <b>Instagram:</b> <a href="https://instagram.com/HANDLE" target="_blank" rel="noopener">@HANDLE</a> <br>
+                        <b>LinkedIn:</b> <a href="https://linkedin.com/in/HANDLE" target="_blank" rel="noopener">@HANDLE</a> <br>
+                        <b>YouTube:</b> <a href="https://youtube.com/@HANDLE" target="_blank" rel="noopener">@HANDLE</a> <br>
+                        <b>Portfolio:</b> <a href="https://PORTFOLIO_URL" target="_blank" rel="noopener">LINK</a>
+                    </p>
+
+                    <h2>About the Artist</h2>
+                    <p class="secondary-text">ARTIST BIO</p>
+                </div>
+
+            </div>
 
             <hr class="artist-divider">
 
-            <!-- ── ARTWORK — duplicate this block for each piece ─────────── -->
+            <!-- ARTWORK — duplicate this block for each piece -->
             <section class="artist-work">
                 <h2>ARTWORK TITLE</h2>
 
-                <!--
-                    CAROUSEL — put all work images inside .carousel-track.
-                    One image: prev/next buttons auto-hide.
-                    Multiple images: they slide. Clicking any image opens lightbox.
-                    Add or remove <img> tags as needed.
-                    Add a matching <button class="carousel-dot"> per image in .carousel-dots.
-                -->
-                <div class="carousel">
-                    <button class="carousel-btn carousel-btn-prev" aria-label="Previous">&#8249;</button>
-                    <div class="carousel-track-wrap">
-                        <div class="carousel-track">
-                            <img src="../assets/works/FILENAME_1.png" alt="ARTWORK TITLE">
-                            <img src="../assets/works/FILENAME_2.png" alt="ARTWORK TITLE">
-                            <img src="../assets/works/FILENAME_3.png" alt="ARTWORK TITLE">
-                        </div>
-                    </div>
-                    <button class="carousel-btn carousel-btn-next" aria-label="Next">&#8250;</button>
-                </div>
-                <div class="carousel-dots">
-                    <button class="carousel-dot active"></button>
-                    <button class="carousel-dot"></button>
-                    <button class="carousel-dot"></button>
-                </div>
-
                 <p class="secondary-text">ARTIST STATEMENT</p>
+
+                <!-- Single image: use work-images single -->
+                <!-- Multiple images: use work-images (two-column grid) -->
+                <div class="work-images single">
+                    <img src="../assets/works/FILENAME.png" alt="ARTWORK TITLE">
+                    <!-- <video src="" controls alt=""></video> -->
+                </div>
             </section>
 
         </article>
@@ -101,14 +90,6 @@
             </a>
         </div>
     </footer>
-
-    <!-- LIGHTBOX -->
-    <div id="lightbox">
-        <button id="lightbox-close">✕</button>
-        <img id="lightbox-img" src="" alt="">
-    </div>
-
-    <script src="../assets/js/artist-page.js"></script>
 
 </body>
 
