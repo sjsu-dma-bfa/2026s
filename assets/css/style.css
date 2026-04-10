@@ -188,9 +188,13 @@ body {
 
 /* ABOUT SECTION */
 .about-section {
-    padding: 40px 0;
+    margin: 20px;
+    padding: 20px;
     max-width: 700px;
     width: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 6px solid var(--hot-peach);
+    border-radius: 4px;
 }
 
 .about-section ul {
@@ -216,7 +220,7 @@ a.primary-text {
     color: var(--hot-peach);
     letter-spacing: 2px;
     word-spacing: 5px;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px var(--deep-sea);
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9), 0 0 20px var(--deep-sea);
 }
 
 .secondary-text {
@@ -224,7 +228,7 @@ a.primary-text {
     font-weight: bold;
     font-style: normal;
     color: var(--text);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px var(--deep-sea);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px var(--deep-sea);
 }
 
 a {
@@ -235,7 +239,7 @@ a {
     color: var(--subtle-blue-green);
     letter-spacing: 3px;
     word-spacing: 5px;
-    text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.8), 0 0 20px var(--text);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9), 0 0 20px var(--deep-sea);
 }
 a:hover {
     color: var(--creamsicle);

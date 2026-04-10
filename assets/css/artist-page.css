@@ -13,20 +13,27 @@
 
 .artist-hero {
     display: flex;
-    gap: 40px;
+    gap: 10px;
     align-items: flex-start;
-}
-
-.artist-portrait {
-    flex-shrink: 0;
-    width: 400px;
-    height: auto;
-    display: block;
+    background: rgba(0, 0, 0, 0.4);
     border: 6px solid var(--hot-peach);
     border-radius: 4px;
 }
 
+.artist-portrait {
+    margin: 20px;
+    flex-shrink: 0;
+    width: 400px;
+    height: auto;
+    display: block;
+    border: 3px dashed var(--hot-peach);
+    border-radius: 4px;
+}
+
 .artist-info {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -44,9 +51,13 @@
 /* WORK IMAGES */
 
 .artist-work {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 6px solid var(--hot-peach);
+    border-radius: 4px;
 }
 
 .work-images {
@@ -57,6 +68,7 @@
 }
 
 .work-images img {
+    padding: 25px;
     height: 300px;
     width: auto;
     max-width: 100%;
@@ -65,6 +77,7 @@
 }
 
 .work-images video {
+    padding: 25px;
     height: 300px;
     width: auto;
     max-width: 100%;
