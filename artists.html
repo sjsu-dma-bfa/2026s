@@ -34,21 +34,26 @@
             <p class="drum-title">— Select an Artist —</p>
 
             <div class="drum-stage">
-                <!-- Up/Down nav -->
-                <div class="drum-nav">
-                    <button id="btn-up" aria-label="Previous artist">▲</button>
-                    <button id="btn-down" aria-label="Next artist">▼</button>
-                </div>
+                <!-- Drum + nav stacked vertically -->
+                <div class="drum-nav-drum">
+                    <div class="drum-nav">
+                        <button id="btn-up" aria-label="Previous artist">▲</button>
+                    </div>
 
-                <!-- 3D Drum -->
-                <div class="drum-container" id="drumContainer">
+                    <!-- 3D Drum -->
+                    <div class="drum-container" id="drumContainer">
                     <div class="drum-selector drum-selector-top"></div>
                     <div class="drum-selector-zone"></div>
                     <div class="drum-selector drum-selector-bottom"></div>
                     <div class="drum-mask-top"></div>
                     <div class="drum-mask-bottom"></div>
                     <div class="drum-cylinder" id="drumCylinder"></div>
-                </div>
+                    </div><!-- /drum-container -->
+
+                    <div class="drum-nav">
+                        <button id="btn-down" aria-label="Next artist">▼</button>
+                    </div>
+                </div><!-- /drum-nav-drum -->
 
                 <!-- Artist Detail Panel — JS populates .artist-star + .artist-star-content -->
                 <div class="artist-detail" id="artistDetail">

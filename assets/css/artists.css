@@ -1,3 +1,54 @@
+/* ─────────────────────────────────────────────────────────────
+   LEFT SIDE = ORIGINAL DRUM LOOK
+   RIGHT SIDE = NEW ARTIST DATA PANEL
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+    --cyan: #38e7ff;
+    --cyan-soft: #a6f2ff;
+    --pink: #ff43c6;
+    --yellow: #ffe487;
+
+    --panel-dark: rgba(8, 6, 24, 0.96);
+    --panel-dark-2: rgba(4, 6, 20, 0.98);
+
+    /* original drum palette */
+    --hot-peach: #ffe487;
+    --deep-sea: #173b4e;
+    --subtle-blue-green: #55c1a9;
+    --text: #ffffff;
+
+    --font-primary: "Gajraj One", system-ui;
+    --font-secondary: "Kumbh Sans", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.main-container {
+    padding: 1.5rem 1rem 3rem;
+}
+
+.artist-drum-wrapper {
+    max-width: 1380px;
+    margin: 0 auto;
+}
+
+.drum-stage {
+    display: grid;
+    grid-template-columns: minmax(48%, 470px) minmax(420px, 1fr);
+    gap: 40px;
+    align-items: center;
+}
+
+.drum-nav-drum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
 /* ─── DRUM TITLE ─────────────────────────────────────────────────────────── */
 
 .drum-title {
@@ -44,7 +95,7 @@
 .drum-item-subtitle {
     font-family: var(--font-secondary);
     font-size: 0.68rem;
-    color: rgba(255, 255, 255, 0.50);
+    color: var(--subtle-blue-green);
     letter-spacing: 0.5px;
     pointer-events: none;
     white-space: nowrap;
@@ -65,12 +116,11 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0, 0, 0, 0.05) 3px,
-        rgba(0, 0, 0, 0.05) 4px);
+    background: repeating-linear-gradient(to bottom,
+            transparent 0px,
+            transparent 3px,
+            rgba(0, 0, 0, 0.05) 3px,
+            rgba(0, 0, 0, 0.05) 4px);
     pointer-events: none;
     z-index: 20;
     border-radius: 12px;
@@ -89,161 +139,377 @@
     z-index: 4;
 }
 
-/* ─── DETAIL PANEL — transparent, acts as star container ────────────────── */
+/* ─── DETAIL PANEL — NEW RIGHT SIDE ─────────────────────────────────────── */
 
 .artist-detail {
     position: relative;
     flex: none;
-    /* Match the drum container height so both columns align flush */
-    width: 380px;
-    height: 420px;
-    display: flex;
-    align-items: center;       /* vertically centres the circle within the column */
-    justify-content: center;
+    width: 420px;
+    min-height: 420px;
+    display: block;
     cursor: pointer;
-    /* Strip the default panel card styles inherited from style.css */
-    background: none !important;
-    border: none !important;
-    box-shadow: none !important;
+    background: linear-gradient(180deg, rgba(8, 6, 24, 0.8), rgba(4, 6, 20, 0.9)) !important;
+    border: 3px solid rgba(255, 67, 198, 0.42) !important;
+    box-shadow:
+        0 0 0 2px rgba(56, 231, 255, 0.12) inset,
+        0 0 24px rgba(255, 67, 198, 0.14),
+        0 0 24px rgba(56, 231, 255, 0.08) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    min-height: unset !important;
+    padding: 64px 24px 24px !important;
+    margin-left: 55px !important;
+    border-radius: 28px !important;
+    min-height: 420px !important;
     gap: 0 !important;
-}
-
-/* ─── CIRCLE SHAPE — Walk of Fame style portrait ───────────────────────── */
-
-.artist-star {
-    position: relative;   /* sit inside the flex-centred .artist-detail */
-    flex-shrink: 0;
-    width: 360px;
-    height: 360px;
-    border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 0 6px var(--subtle-blue-green),
-                0 0 0 8px rgba(23, 59, 78, 0.9),
-                0 0 28px rgba(85, 193, 169, 0.45);
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-                filter 0.25s ease;
 }
 
-.artist-star img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
+/* ─── DETAIL PANEL — NEW RIGHT SIDE ─────────────────────────────────────── */
+
+
+.artist-loading-wrap {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
 }
 
-/* Subtle gradient so text stays readable */
-.artist-star::after {
-    content: '';
+/* (rest of loading bar code...) */
+
+.artist-detail::before {
+    content: "ARTIST DATA";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        to bottom,
-        transparent 30%,
-        rgba(23, 59, 78, 0.72) 100%
-    );
-    pointer-events: none;
-}
-
-/* Hover: star pulses slightly */
-.artist-detail:hover .artist-star {
-    transform: scale(1.04);
-    filter: brightness(1.12) drop-shadow(0 0 24px rgba(85, 193, 169, 0.6));
-}
-
-/* ─── TEXT OVERLAY on the star ───────────────────────────────────────────── */
-
-.artist-star-overlay {
-    position: absolute;
-    bottom: 25%;
-    transform: translateY(-50%);
+    top: 0;
     left: 0;
     right: 0;
+    padding: 0.9rem 1.25rem;
+
+    font-family: var(--font-primary);
+    /* ✅ match main font */
+    font-size: 0.9rem;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+
+    color: #09101c;
+
+    background: linear-gradient(90deg, #38e7ff, #c9d4ff 48%, #ff43c6);
+
+    text-shadow:
+        1px 1px 0 rgba(255, 255, 255, 0.25),
+        0 0 6px rgba(255, 255, 255, 0.15);
+
     z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
+}
+
+.artist-detail::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(0deg,
+            rgba(255, 255, 255, 0.014) 0px,
+            rgba(255, 255, 255, 0.014) 2px,
+            transparent 2px,
+            transparent 6px);
+    opacity: 0.16;
+}
+
+.artist-star-glow {
+    position: absolute;
+    top: -40px;
+    right: -20px;
+    width: 220px;
+    height: 220px;
+    background: radial-gradient(circle, rgba(255, 67, 198, 0.18), transparent 65%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.artist-detail-placeholder {
+    height: 100%;
+    min-height: 300px;
+    display: grid;
+    place-items: center;
+    gap: 1rem;
     text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    z-index: 1;
+}
+
+.artist-detail-placeholder svg {
+    width: 82px;
+    height: 82px;
+    fill: none;
+    stroke: currentColor;
+}
+
+.artist-detail-placeholder span {
+    max-width: 280px;
+    line-height: 1.5;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.artist-detail-content {
+    display: grid;
+    gap: 1.2rem;
+    position: relative;
+    z-index: 1;
+    animation: artistPanelIn 220ms ease;
+}
+
+.artist-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 30px;
+    border: 4px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.03);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0 auto;
+    box-shadow:
+        0 0 0 2px rgba(255, 255, 255, 0.05) inset,
+        0 0 18px rgba(255, 67, 198, 0.08);
+}
+
+.artist-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(1.02) contrast(1.02);
+}
+
+.artist-meta {
+    display: grid;
+    gap: 0.85rem;
+    min-width: 0;
+    width: 100%;
+}
+
+.artist-name {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: clamp(1.6rem, 3vw, 2.6rem);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 0.95;
+    color: #ffe487;
+    text-shadow:
+        0 0 8px rgba(255, 228, 135, 0.16),
+        0 0 12px rgba(255, 67, 198, 0.08);
+
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.artist-role {
+    margin: 0;
+    font-family: var(--font-secondary);
+    color: #a6f2ff;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    text-shadow:
+        0 0 8px rgba(56, 231, 255, 0.18),
+        1px 1px 0 rgba(8, 12, 28, 0.8);
+
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+
+.artist-bio {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.55;
+    max-width: 60ch;
+    text-shadow: 1px 1px 0 rgba(8, 12, 28, 0.5);
+}
+
+.artist-stats {
+    display: grid;
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.artist-loading-wrap {
+    display: grid;
+    gap: 0.6rem;
+    margin-top: 0.4rem;
+}
+
+.artist-loading-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+
+    font-family: var(--font-primary);
+    /* ✅ match arcade font */
+    font-size: 0.8rem;
+    font-weight: 900;
+
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    color: #dffcf7;
+
+    text-shadow:
+        1px 1px 0 rgba(8, 12, 28, 0.8),
+        0 0 6px rgba(56, 231, 255, 0.12);
+}
+
+.artist-loading-percent {
+    color: #ffe487;
+    text-shadow: 0 0 8px rgba(255, 228, 135, 0.18);
+}
+
+.artist-loading-bar {
+    position: relative;
+    height: 16px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 0 12px rgba(56, 231, 255, 0.08);
+}
+
+.artist-loading-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(90deg,
+            rgba(255, 255, 255, 0.04) 0px,
+            rgba(255, 255, 255, 0.04) 10px,
+            transparent 10px,
+            transparent 20px);
     pointer-events: none;
 }
 
-.artist-detail-name {
-    font-family: var(--font-primary);
-    font-size: 1.05rem;
-    color: var(--text);
-    font-style: italic;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-    line-height: 1.2;
+.artist-loading-bar i {
+    display: block;
+    width: 0%;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #38e7ff, #ff43c6, #ffd777, #f6ef6c);
+    box-shadow:
+        0 0 12px rgba(56, 231, 255, 0.18),
+        0 0 12px rgba(255, 67, 198, 0.12);
+    transition: width 0.12s steps(3, end);
+    position: relative;
 }
 
-.artist-detail-subtitle {
-    font-family: var(--font-secondary);
-    font-size: 0.65rem;
-    color: rgba(255, 255, 255, 0.70);
-    letter-spacing: 1px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+.artist-loading-bar i::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    animation: loadingSweep 0.8s linear infinite;
 }
 
-.artist-detail-hint {
-    font-family: var(--font-secondary);
-    font-size: 0.58rem;
-    color: rgba(255, 255, 255, 0.45);
-    letter-spacing: 2px;
+@keyframes loadingSweep {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+
+.artist-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 0.7rem;
+    padding: 0.95rem 1.4rem;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    color: white;
+    text-decoration: none;
     text-transform: uppercase;
-    margin-top: 2px;
+    letter-spacing: 0.18em;
+    font-size: 0.84rem;
+    font-weight: 900;
+    font-family: var(--font-primary);
+    background:
+        linear-gradient(90deg, rgba(24, 92, 118, 0.7), rgba(75, 24, 93, 0.6));
+    box-shadow:
+        0 0 0 2px rgba(56, 231, 255, 0.12) inset,
+        0 0 10px rgba(255, 67, 198, 0.08);
+    transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+.artist-link:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.08);
 }
 
 /* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
 
-/* Star pops in when artist changes */
-@keyframes starPopIn {
-    from { opacity: 0; transform: scale(0.75) rotate(-8deg); }
-    to   { opacity: 1; transform: scale(1)    rotate(0deg);  }
+@keyframes artistPanelIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-.artist-detail.flash .artist-star {
-    animation: starPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+@keyframes panelPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.97) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
-.artist-detail.flash .artist-star-overlay {
-    animation: starPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s both;
+.artist-detail.flash .artist-detail-content {
+    animation: panelPopIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* Star expands outward on navigate — the star "explodes" into shooting stars */
-@keyframes starExpand {
-    0%   { transform: scale(1);    opacity: 1; }
-    40%  { transform: scale(1.25); opacity: 1; }
-    100% { transform: scale(4);    opacity: 0; }
+@keyframes panelExpand {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    40% {
+        transform: scale(1.04);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.12);
+        opacity: 0;
+    }
 }
 
-.artist-detail.star-expand .artist-star {
-    animation: starExpand 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.artist-detail.star-expand .artist-detail-content {
+    animation: panelExpand 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     pointer-events: none;
-}
-
-.artist-detail.star-expand .artist-star-overlay {
-    animation: starExpand 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
-    pointer-events: none;
-}
-
-/* ─── SHOOTING STARS OVERLAY ─────────────────────────────────────────────── */
-
-#shootingStarsOverlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-#shootingStarsOverlay.active {
-    pointer-events: all;
 }
 
 /* ─── DRUM FOOTER ────────────────────────────────────────────────────────── */
@@ -277,33 +543,22 @@
 
 @media (max-width: 900px) {
     .artist-detail {
-        width: 280px;
-        height: 420px;
+        width: 320px;
+        min-height: 420px !important;
+        height: auto;
     }
-
-    .artist-star {
-        width: 260px;
-        height: 260px;
-    }
-
-
 }
 
 @media (max-width: 480px) {
     .artist-detail {
-        width: 220px;
-        height: 420px;
+        width: 100%;
+        min-height: 420px !important;
+        height: auto;
+        padding: 56px 18px 18px !important;
     }
 
-    .artist-star {
-        width: 200px;
-        height: 200px;
-    }
-
-
-
-    .artist-detail-name {
-        font-size: 0.85rem;
+    .artist-name {
+        font-size: 2rem;
     }
 }
 
