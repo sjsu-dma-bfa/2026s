@@ -262,3 +262,14 @@ updateDrum(false);
 setTimeout(() => {
     cylinder.querySelectorAll('.drum-item').forEach(el => { el.style.transition = ''; });
 }, 50);
+
+// Reset all state when browser restores page from back/forward cache
+window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+        transitioning = false;
+        isAnimating   = false;
+        detail.classList.remove('star-expand');
+        animateLoadingBar('reset');
+        updateDrum(false);
+    }
+});
