@@ -36,75 +36,89 @@ const ARTISTS = [
     { nickname: null, name: "Shirley Zhong", title: "Determined", subtitle: "Short Animation about an Octopus", imgX: 50, imgY: 30, imgScale: 1.0, img: "assets/artists_portrait/shirley_zhong.png", href: "artists/shirley_zhong.html" },
 ];
 
-// STATE
-const N            = ARTISTS.length;
+// ─── STATE ────────────────────────────────────────────────────────────────────
+const N = ARTISTS.length;
 const ROT_PER_STEP = 22;
- 
+
 let currentIndex  = 0;
 let isAnimating   = false;
 let transitioning = false;
- 
-// ELEMENTS
+let _loadingInterval = null;
+
+// ─── ELEMENTS ─────────────────────────────────────────────────────────────────
 const cylinder      = document.getElementById('drumCylinder');
 const detail        = document.getElementById('artistDetail');
 const counter       = document.getElementById('drumCounter');
-const overlay       = document.getElementById('shootingStarsOverlay');
 const drumContainer = document.getElementById('drumContainer');
- 
-// BUILD DRUM ITEMS
+
+// ─── HISTORY STATE ────────────────────────────────────────────────────────────
+function saveDrumState() {
+    history.replaceState({ drumIndex: currentIndex }, '');
+}
+
+// ─── BUILD DRUM ITEMS ─────────────────────────────────────────────────────────
 ARTISTS.forEach((artist, i) => {
-    const el         = document.createElement('div');
-    el.className     = 'drum-item';
+
+    const el = document.createElement('div');
+    el.className = 'drum-item';
     el.dataset.index = i;
- 
-    const titleEl         = document.createElement('div');
-    titleEl.className     = 'drum-item-title';
-    titleEl.textContent   = artist.title;
- 
-    const subtitleEl       = document.createElement('div');
-    subtitleEl.className   = 'drum-item-subtitle drum-item-subtitle--pink';
+
+    const titleEl = document.createElement('div');
+    titleEl.className = 'drum-item-title';
+    titleEl.textContent = artist.title;
+
+    const subtitleEl = document.createElement('div');
+    subtitleEl.className = 'drum-item-subtitle drum-item-subtitle--pink';
     subtitleEl.textContent = artist.subtitle;
- 
+
     el.appendChild(titleEl);
     el.appendChild(subtitleEl);
- 
+
     el.addEventListener('click', () => {
         if (transitioning) return;
         i !== currentIndex ? goTo(i) : navigate(i);
     });
- 
+
     cylinder.appendChild(el);
 });
- 
-// DRUM RENDERING
+
+// ─── DRUM RENDER ──────────────────────────────────────────────────────────────
 function updateDrum(animate) {
+
     const items = cylinder.querySelectorAll('.drum-item');
- 
+
     items.forEach((el, i) => {
+
         let rel = i - currentIndex;
-        if (rel >  N / 2) rel -= N;
-        if (rel < -N / 2) rel += N;
- 
-        const angle      = rel * ROT_PER_STEP;
-        const rad        = angle * Math.PI / 180;
+        if (rel > N/2) rel -= N;
+        if (rel < -N/2) rel += N;
+
+        const angle = rel * ROT_PER_STEP;
+        const rad   = angle * Math.PI / 180;
+
         const translateY = Math.sin(rad) * 120;
         const translateZ = (Math.cos(rad) - 1) * 80;
         const scale      = Math.cos(rad) * 0.55 + 0.5;
         const opacity    = Math.abs(rel) > 3 ? 0 : (Math.cos(rad) * 0.6 + 0.5);
- 
+
         el.style.transition = animate
             ? 'transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.35s ease'
             : 'none';
-        el.style.transform  = `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale})`;
-        el.style.opacity    = opacity;
-        el.style.zIndex     = Math.round(scale * 10);
+
+        el.style.transform =
+            `translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale})`;
+
+        el.style.opacity = opacity;
+        el.style.zIndex  = Math.round(scale * 10);
+
         el.classList.toggle('active', i === currentIndex);
     });
- 
+
     counter.textContent = `${currentIndex + 1} / ${N}`;
     updateDetail(currentIndex);
 }
 
+// ─── LOADING BAR ──────────────────────────────────────────────────────────────
 function buildLoadingBar() {
     return `
         <div class="artist-loading-wrap">
@@ -118,8 +132,61 @@ function buildLoadingBar() {
         </div>
     `;
 }
- 
-// DETAIL PANEL — NEW RIGHT SIDE ONLY
+
+function animateLoadingBar(mode='reset') {
+
+    const wrap    = detail.querySelector('.artist-loading-wrap');
+    const bar     = detail.querySelector('.artist-loading-bar i');
+    const percent = detail.querySelector('.artist-loading-percent');
+
+    if (!wrap) return;
+
+    if (_loadingInterval) {
+        clearInterval(_loadingInterval);
+        _loadingInterval = null;
+    }
+
+    if (mode === 'reset') {
+        bar.style.width = '0%';
+        percent.textContent = '0%';
+        wrap.classList.remove('is-hovering','is-complete');
+        return;
+    }
+
+    if (mode === 'hover') {
+
+        wrap.classList.add('is-hovering');
+
+        let value = 0;
+
+        _loadingInterval = setInterval(()=>{
+
+            value += Math.floor(Math.random()*12)+4;
+
+            if (value >= 72) {
+                value = 72;
+                clearInterval(_loadingInterval);
+            }
+
+            bar.style.width = value + '%';
+            percent.textContent = value + '%';
+
+        },45);
+
+        return;
+    }
+
+    if (mode === 'complete') {
+
+        wrap.classList.remove('is-hovering');
+        wrap.classList.add('is-complete');
+
+        bar.style.width = '100%';
+        percent.textContent = 'READY';
+    }
+}
+
+// ─── DETAIL PANEL ─────────────────────────────────────────────────────────────
 function updateDetail(idx) {
     const artist = ARTISTS[idx];
 
@@ -130,24 +197,34 @@ function updateDetail(idx) {
     detail.innerHTML = `
         <div class="artist-star-glow"></div>
         <div class="artist-detail-content">
+
             <div class="artist-hero">
                 <img
                     src="${artist.img}"
                     alt="${artist.name}"
                     loading="lazy"
-                    style="object-fit:cover; object-position:${artist.imgX}% ${artist.imgY}%; transform:scale(${artist.imgScale}); transform-origin:${artist.imgX}% ${artist.imgY}%;"
-                >
+                    style="
+                        object-fit:cover;
+                        object-position:${artist.imgX}% ${artist.imgY}%;
+                        transform:scale(${artist.imgScale});
+                        transform-origin:${artist.imgX}% ${artist.imgY}%;
+                    ">
             </div>
 
             <div class="artist-meta">
                 <h2 class="artist-name">${artist.name}</h2>
-                <p class="artist-role">${artist.title} • ${artist.subtitle}</p>
+
+                <p class="artist-role">
+                    ${artist.title} • ${artist.subtitle}
+                </p>
+
                 <div class="artist-stats">
                     ${buildLoadingBar()}
                 </div>
 
-                <a class="artist-link" href="${artist.href}">Open Artist</a>
+                <button class="artist-link">Open Artist</button>
             </div>
+
         </div>
     `;
 
@@ -156,120 +233,97 @@ function updateDetail(idx) {
     detail.onmouseenter = () => { if (!transitioning) animateLoadingBar('hover'); };
     detail.onmouseleave = () => { if (!transitioning) animateLoadingBar('reset'); };
     detail.onclick      = () => { if (!transitioning) navigate(idx); };
+
+    detail.querySelector('.artist-link').onclick = (e) => {
+        e.stopPropagation();
+        navigate(idx);
+    };
 }
-let _loadingInterval = null;
 
-function animateLoadingBar(mode = 'reset') {
-    const wrap    = detail.querySelector('.artist-loading-wrap');
-    const bar     = detail.querySelector('.artist-loading-bar i');
-    const percent = detail.querySelector('.artist-loading-percent');
-    if (!wrap || !bar || !percent) return;
-
-    if (_loadingInterval) { clearInterval(_loadingInterval); _loadingInterval = null; }
-
-    if (mode === 'reset') {
-        bar.style.width       = '0%';
-        percent.textContent   = '0%';
-        wrap.classList.remove('is-hovering', 'is-complete');
-        return;
-    }
-
-    if (mode === 'hover') {
-        wrap.classList.remove('is-complete');
-        wrap.classList.add('is-hovering');
-        let value = parseInt(bar.style.width) || 0;
-        _loadingInterval = setInterval(() => {
-            value += Math.floor(Math.random() * 12) + 4;
-            if (value >= 72) { value = 72; clearInterval(_loadingInterval); _loadingInterval = null; }
-            bar.style.width     = `${value}%`;
-            percent.textContent = `${value}%`;
-        }, 45);
-        return;
-    }
-
-    if (mode === 'complete') {
-        wrap.classList.remove('is-hovering');
-        wrap.classList.add('is-complete');
-        bar.style.width     = '100%';
-        percent.textContent = 'READY';
-    }
-}
- 
-// SHATTER TRANSITION
-function starPath(cx, cy, outerR, innerR, pts) {
-    let d = '';
-    for (let k = 0; k < pts * 2; k++) {
-        const a = (k * Math.PI / pts) - Math.PI / 2;
-        const r = k % 2 === 0 ? outerR : innerR;
-        d += (k === 0 ? 'M' : 'L') +
-             (cx + Math.cos(a) * r).toFixed(2) + ',' +
-             (cy + Math.sin(a) * r).toFixed(2);
-    }
-    return d + 'Z';
-}
- 
+// ─── NAVIGATION ───────────────────────────────────────────────────────────────
 function navigate(idx) {
+
     if (transitioning) return;
-    const href    = ARTISTS[idx].href;
+
+    saveDrumState();
+
     transitioning = true;
 
     animateLoadingBar('complete');
-    setTimeout(() => { window.location.href = href; }, 600);
+
+    setTimeout(()=>{
+        window.location.assign(ARTISTS[idx].href);
+    },600);
 }
- 
-// NAVIGATION CONTROLS
+
+// ─── DRUM CONTROL ─────────────────────────────────────────────────────────────
 function goTo(index) {
+
     if (isAnimating || transitioning) return;
-    isAnimating  = true;
+
+    isAnimating = true;
+
     currentIndex = ((index % N) + N) % N;
+
+    saveDrumState();
+
     updateDrum(true);
-    setTimeout(() => { isAnimating = false; }, 360);
+
+    setTimeout(()=>{ isAnimating = false; },360);
 }
- 
-function stepUp()   { goTo(currentIndex - 1); }
-function stepDown() { goTo(currentIndex + 1); }
- 
-document.getElementById('btn-up').addEventListener('click',   stepUp);
-document.getElementById('btn-down').addEventListener('click', stepDown);
- 
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowUp')   { e.preventDefault(); stepUp(); }
-    if (e.key === 'ArrowDown') { e.preventDefault(); stepDown(); }
-    if (e.key === 'Enter')     { navigate(currentIndex); }
+
+function stepUp(){ goTo(currentIndex-1); }
+function stepDown(){ goTo(currentIndex+1); }
+
+// ─── CONTROLS ─────────────────────────────────────────────────────────────────
+document.getElementById('btn-up').onclick   = stepUp;
+document.getElementById('btn-down').onclick = stepDown;
+
+document.addEventListener('keydown',(e)=>{
+    if(e.key==='ArrowUp') stepUp();
+    if(e.key==='ArrowDown') stepDown();
+    if(e.key==='Enter') navigate(currentIndex);
 });
- 
+
 let wheelAccum = 0;
-drumContainer.addEventListener('wheel', (e) => {
+
+drumContainer.addEventListener('wheel',(e)=>{
+
     e.preventDefault();
+
     wheelAccum += e.deltaY;
-    if (Math.abs(wheelAccum) >= 60) {
-        wheelAccum > 0 ? stepDown() : stepUp();
+
+    if(Math.abs(wheelAccum)>=60){
+        wheelAccum>0 ? stepDown() : stepUp();
         wheelAccum = 0;
     }
-}, { passive: false });
- 
-let touchStartY = 0;
-drumContainer.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-}, { passive: true });
-drumContainer.addEventListener('touchend', (e) => {
-    const dy = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(dy) > 30) { dy > 0 ? stepDown() : stepUp(); }
-}, { passive: true });
- 
-// INIT
-updateDrum(false);
-setTimeout(() => {
-    cylinder.querySelectorAll('.drum-item').forEach(el => { el.style.transition = ''; });
-}, 50);
 
-// Reset all state when browser restores page from back/forward cache
-window.addEventListener('pageshow', (e) => {
-    if (e.persisted) {
-        transitioning = false;
-        isAnimating   = false;
-        detail.classList.remove('star-expand');
-        animateLoadingBar('reset');
-        updateDrum(false);
+},{passive:false});
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+const saved = history.state?.drumIndex;
+
+if (typeof saved === 'number') {
+    currentIndex = saved;
+}
+
+updateDrum(false);
+saveDrumState();
+
+// ─── BF CACHE FIX ─────────────────────────────────────────────────────────────
+window.addEventListener('pageshow', () => {
+
+    transitioning = false;
+    isAnimating   = false;
+
+    if (_loadingInterval){
+        clearInterval(_loadingInterval);
+        _loadingInterval = null;
     }
+
+    const saved = history.state?.drumIndex;
+    if (typeof saved === 'number') currentIndex = saved;
+
+    animateLoadingBar('reset');
+    updateDrum(false);
 });
