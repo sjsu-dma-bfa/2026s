@@ -6,7 +6,7 @@ const ARTISTS = [
     { nickname: null, name: "Victoria Arevalo", title: "What You Leave Behind", subtitle: "Choice-Matters CYOA Game", imgX: 50, imgY: 35, imgScale: 1.0, img: "assets/artists_portrait/victoria_arevalo.png", href: "artists/victoria_arevalo.html" },
     { nickname: null, name: "Rhyme Balatbat", title: "SweetHeart: First Batch", subtitle: "3D-printed Figurine Series", imgX: 50, imgY: 9, imgScale: 1.0, img: "assets/artists_portrait/rhyme_balatbat.png", href: "artists/rhyme_balatbat.html" },
     { nickname: null, name: "Julian Cabadas", title: "In Your Head", subtitle: "3D Animation Film made in Blender", imgX: 50, imgY: 15, imgScale: 1.0, img: "assets/artists_portrait/julian_cabadas.jpeg", href: "artists/julian_cabadas.html" },
-    { nickname: "SuperBagle", name: "Miguel Cano", title: "Cosmic Eternity Opening", subtitle: "Hypothetical Opening of Animated Series", imgX: 50, imgY: 25, imgScale: 1.0, img: "assets/artists_portrait/juan_jose_cano_garcia.jpg", href: "artists/miguel_cano.html" },
+    { nickname: "SuperBagle", name: "Miguel Cano", title: "Cosmic Eternity Opening", subtitle: "Opening of Animated Series", imgX: 50, imgY: 25, imgScale: 1.0, img: "assets/artists_portrait/juan_jose_cano_garcia.jpg", href: "artists/miguel_cano.html" },
     { nickname: null, name: "Joshua Chan", title: "Spiraling Madness", subtitle: "Horror Game", imgX: 50, imgY: 80, imgScale: 1.5, img: "assets/artists_portrait/joshua_chan.jpeg", href: "artists/team_spiral.html" },
     { nickname: null, name: "Shanglong Chen", title: "Becoming", subtitle: "Video-based Motion Graphic Animation", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/shanglong_chen.jpeg", href: "artists/shanglong_chen.html" },
     { nickname: null, name: "Jasmine Cisneros", title: "Hello Gamer!", subtitle: "Web-based Choose-Your-Own-Adventure", imgX: 50, imgY: 20, imgScale: 1.0, img: "assets/artists_portrait/jasmine_cisneros.JPG", href: "artists/jasmine_cisneros.html" },
@@ -21,7 +21,7 @@ const ARTISTS = [
     { nickname: "DerpRex", name: "Catherine Macdonald", title: "Guardian of Artistic Integrity", subtitle: "Mixed Media Painting", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/catherine_macdonald.png", href: "artists/catherine_macdonald.html" },
     { nickname: "[etho.png]", name: "Ethan Vilchis Macedo", title: "Spiraling Madness", subtitle: "Horror Game", imgX: 50, imgY: 55, imgScale: 1.0, img: "assets/artists_portrait/ethan_vilchis_macedo.jpeg", href: "artists/team_spiral.html" },
     { nickname: null, name: "David Nguyen", title: "Prehistoric Walk", subtitle: "Projected, Looping Documentary", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/david_nguyen.jpg", href: "artists/david_nguyen.html" },
-    { nickname: null, name: "Nguyen Nguyen", title: "Magic Evolved", subtitle: "Power Fantasy Game", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/nguyen_nguyen.png", href: "artists/nguyen_nguyen.html" },
+    { nickname: null, name: "Nguyen Nguyen", title: "Magic Evolved", subtitle: "Power Fantasy Game", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/nguyen_nguyen.jpg", href: "artists/nguyen_nguyen.html" },
     { nickname: "Alex", name: "Alexander Rodriguez", title: "My Silly Little Dungeon", subtitle: "Interactive Video Installation in a 3D Environment", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/alexander_rodriguez.png", href: "artists/alexander_rodriguez.html" },
     { nickname: "Lizzie Jane", name: "Elizabeth Salinas", title: "To The Land That I Love", subtitle: "Animation Projected over Painting", imgX: 50, imgY: 15, imgScale: 1.0, img: "assets/artists_portrait/elizabeth_salinas.png", href: "artists/elizabeth_salinas.html" },
     { nickname: "Ben", name: "Benjamin Sandoval", title: "Timeless Crossroads", subtitle: "3D Replica viewed in VR", imgX: 50, imgY: 50, imgScale: 1.0, img: "assets/artists_portrait/ben_sandoval.png", href: "artists/benjamin_sandoval.html" },
@@ -280,8 +280,8 @@ document.getElementById('btn-up').onclick   = stepUp;
 document.getElementById('btn-down').onclick = stepDown;
 
 document.addEventListener('keydown',(e)=>{
-    if(e.key==='ArrowUp') stepUp();
-    if(e.key==='ArrowDown') stepDown();
+    if(e.key==='ArrowLeft') stepUp();
+    if(e.key==='ArrowRight') stepDown();
     if(e.key==='Enter') navigate(currentIndex);
 });
 
