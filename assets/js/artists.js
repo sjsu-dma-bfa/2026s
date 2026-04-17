@@ -3,7 +3,7 @@
 // imgScale     = zoom multiplier. Default 1.0 = no zoom.
 const ARTISTS = [
     { nickname: null, name: "Aryan Advani", title: "Spiraling Madness", subtitle: "Horror Game", imgX: 50, imgY: 65, imgScale: 2.0, img: "assets/artists_portrait/aryan_advani.jpeg", href: "artists/team_spiral.html" },
-    { nickname: null, name: "Victoria Arevalo", title: "What You Leave Behind", subtitle: "Choice-Matters CYOA Game", imgX: 50, imgY: 35, imgScale: 1.0, img: "assets/artists_portrait/victoria_arevalo.png", href: "artists/victoria_arevalo.html" },
+    { nickname: null, name: "Victoria Arevalo", title: "What You Leave Behind", subtitle: "Moral Choice Game", imgX: 50, imgY: 35, imgScale: 1.0, img: "assets/artists_portrait/victoria_arevalo.png", href: "artists/victoria_arevalo.html" },
     { nickname: null, name: "Rhyme Balatbat", title: "SweetHeart: First Batch", subtitle: "3D-printed Figurine Series", imgX: 50, imgY: 9, imgScale: 1.0, img: "assets/artists_portrait/rhyme_balatbat.png", href: "artists/rhyme_balatbat.html" },
     { nickname: null, name: "Julian Cabadas", title: "In Your Head", subtitle: "3D Animation Film made in Blender", imgX: 50, imgY: 15, imgScale: 1.0, img: "assets/artists_portrait/julian_cabadas.jpeg", href: "artists/julian_cabadas.html" },
     { nickname: "SuperBagle", name: "Miguel Cano", title: "Cosmic Eternity Opening", subtitle: "Opening of Animated Series", imgX: 50, imgY: 25, imgScale: 1.0, img: "assets/artists_portrait/juan_jose_cano_garcia.jpg", href: "artists/miguel_cano.html" },
